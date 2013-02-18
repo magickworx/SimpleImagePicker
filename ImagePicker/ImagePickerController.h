@@ -1,12 +1,12 @@
 /*****************************************************************************
  *
- * FILE:	main.m
- * DESCRIPTION:	ImagePicker: The iPhone Application Primitive Main
- * DATE:	Mon, Jan 14 2013
- * UPDATED:	Mon, Jan 14 2013
+ * FILE:	ImagePickerController.h
+ * DESCRIPTION:	ImagePicker: Image Picker Controller using Assets Library
+ * DATE:	Mon, Feb 11 2013
+ * UPDATED:	Mon, Feb 18 2013
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
- * URL:		http://www.MagickWorX.COM/
+ * URL:		http://www.iPhone.MagickWorX.COM/
  * COPYRIGHT:	(c) 2013 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
@@ -36,18 +36,18 @@
  *   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  *   THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: main.m,v 1.1 2013/01/15 19:37:50 kouichi Exp $
+ * $Id: ImagePickerController.h,v 1.1 2013/02/12 15:16:03 kouichi Exp $
  *
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
+typedef void	(^ImagePickerSelectHandler)(UIImage * image);
 
-#import "AppDelegate.h"
-
-int
-main(int argc, char * argv[])
+@interface ImagePickerController : UITableViewController
 {
-  @autoreleasepool {
-    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-  }
+@private
+  ImagePickerSelectHandler	_selectHandler;
 }
+
+@property (nonatomic,copy) ImagePickerSelectHandler	selectHandler;
+
+@end

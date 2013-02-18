@@ -16,6 +16,8 @@
 		B3F7897116D26C6B00414431 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B3F7897016D26C6B00414431 /* Default.png */; };
 		B3F7897316D26C6B00414431 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3F7897216D26C6B00414431 /* Default@2x.png */; };
 		B3F7897516D26C6B00414431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3F7897416D26C6B00414431 /* Default-568h@2x.png */; };
+		B3F7897D16D26CFC00414431 /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F7897C16D26CFC00414431 /* ImagePickerController.m */; };
+		B3F7897F16D26D4C00414431 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F7897E16D26D4C00414431 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		B3F7897016D26C6B00414431 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B3F7897216D26C6B00414431 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B3F7897416D26C6B00414431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B3F7897B16D26CFC00414431 /* ImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerController.h; sourceTree = "<group>"; };
+		B3F7897C16D26CFC00414431 /* ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
+		B3F7897E16D26D4C00414431 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3F7897F16D26D4C00414431 /* AssetsLibrary.framework in Frameworks */,
 				B3F7895F16D26C6B00414431 /* UIKit.framework in Frameworks */,
 				B3F7896116D26C6B00414431 /* Foundation.framework in Frameworks */,
 				B3F7896316D26C6B00414431 /* CoreGraphics.framework in Frameworks */,
@@ -51,6 +57,7 @@
 		B3F7895216D26C6B00414431 = {
 			isa = PBXGroup;
 			children = (
+				B3F7896516D26C6B00414431 /* Supporting Files */,
 				B3F7896416D26C6B00414431 /* ImagePicker */,
 				B3F7895D16D26C6B00414431 /* Frameworks */,
 				B3F7895C16D26C6B00414431 /* Products */,
@@ -68,6 +75,7 @@
 		B3F7895D16D26C6B00414431 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3F7897E16D26D4C00414431 /* AssetsLibrary.framework */,
 				B3F7895E16D26C6B00414431 /* UIKit.framework */,
 				B3F7896016D26C6B00414431 /* Foundation.framework */,
 				B3F7896216D26C6B00414431 /* CoreGraphics.framework */,
@@ -78,9 +86,10 @@
 		B3F7896416D26C6B00414431 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				B3F7897B16D26CFC00414431 /* ImagePickerController.h */,
+				B3F7897C16D26CFC00414431 /* ImagePickerController.m */,
 				B3F7896D16D26C6B00414431 /* AppDelegate.h */,
 				B3F7896E16D26C6B00414431 /* AppDelegate.m */,
-				B3F7896516D26C6B00414431 /* Supporting Files */,
 			);
 			path = ImagePicker;
 			sourceTree = "<group>";
@@ -97,6 +106,7 @@
 				B3F7897416D26C6B00414431 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +176,7 @@
 			files = (
 				B3F7896B16D26C6B00414431 /* main.m in Sources */,
 				B3F7896F16D26C6B00414431 /* AppDelegate.m in Sources */,
+				B3F7897D16D26CFC00414431 /* ImagePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
