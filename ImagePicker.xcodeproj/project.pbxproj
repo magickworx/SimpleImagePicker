@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B34321E516FA82000099F6F9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = B34321E116FA82000099F6F9 /* Icon-72.png */; };
+		B34321E616FA82000099F6F9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B34321E216FA82000099F6F9 /* Icon-72@2x.png */; };
+		B34321E716FA82000099F6F9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B34321E316FA82000099F6F9 /* Icon.png */; };
+		B34321E816FA82000099F6F9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B34321E416FA82000099F6F9 /* Icon@2x.png */; };
 		B3F7895F16D26C6B00414431 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F7895E16D26C6B00414431 /* UIKit.framework */; };
 		B3F7896116D26C6B00414431 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F7896016D26C6B00414431 /* Foundation.framework */; };
 		B3F7896316D26C6B00414431 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F7896216D26C6B00414431 /* CoreGraphics.framework */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B34321E116FA82000099F6F9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		B34321E216FA82000099F6F9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		B34321E316FA82000099F6F9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B34321E416FA82000099F6F9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		B3F7895B16D26C6B00414431 /* ImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F7895E16D26C6B00414431 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B3F7896016D26C6B00414431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +105,10 @@
 		B3F7896516D26C6B00414431 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B34321E116FA82000099F6F9 /* Icon-72.png */,
+				B34321E216FA82000099F6F9 /* Icon-72@2x.png */,
+				B34321E316FA82000099F6F9 /* Icon.png */,
+				B34321E416FA82000099F6F9 /* Icon@2x.png */,
 				B3F7896616D26C6B00414431 /* ImagePicker-Info.plist */,
 				B3F7896716D26C6B00414431 /* InfoPlist.strings */,
 				B3F7896A16D26C6B00414431 /* main.m */,
@@ -164,6 +176,10 @@
 				B3F7897116D26C6B00414431 /* Default.png in Resources */,
 				B3F7897316D26C6B00414431 /* Default@2x.png in Resources */,
 				B3F7897516D26C6B00414431 /* Default-568h@2x.png in Resources */,
+				B34321E516FA82000099F6F9 /* Icon-72.png in Resources */,
+				B34321E616FA82000099F6F9 /* Icon-72@2x.png in Resources */,
+				B34321E716FA82000099F6F9 /* Icon.png in Resources */,
+				B34321E816FA82000099F6F9 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +305,7 @@
 				B3F7897A16D26C6B00414431 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

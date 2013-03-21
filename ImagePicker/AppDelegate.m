@@ -3,7 +3,7 @@
  * FILE:	AppDelegate.m
  * DESCRIPTION:	ImagePicker: Application Main Controller
  * DATE:	Mon, Feb 18 2013
- * UPDATED:	Mon, Feb 18 2013
+ * UPDATED:	Thu, Mar 21 2013
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.MagickWorX.COM/
@@ -47,6 +47,10 @@
 @property (nonatomic,retain) UINavigationController *	navigationController;
 @end
 
+@interface AppDelegate (Private)
+-(void)activityActionForImage:(UIImage *)image;
+@end
+
 @implementation AppDelegate
 
 @synthesize	navigationController	= _navigationController;
@@ -59,6 +63,20 @@ static void uncaughtExceptionHandler(NSException * exception)
   // Internal error reporting
 }
 #endif	// DEBUG
+
+-(id)init
+{
+  self = [super init];
+  if (self) {
+    UIColor *	color	= [UIColor blackColor];
+    [[UINavigationBar appearance] setTintColor:color];
+    [[UIToolbar appearance] setTintColor:color];
+    [[UISearchBar appearance] setTintColor:color];
+    [[UISegmentedControl appearance] setTintColor:color];
+    [[UIStepper appearance] setTintColor:color];
+  }
+  return self;
+}
 
 -(void)dealloc
 {
@@ -81,9 +99,11 @@ static void uncaughtExceptionHandler(NSException * exception)
   self.window = window;
   [window release];
 
+  __block AppDelegate *		weakSelf = self;
   ImagePickerController *	viewController;
   viewController = [[ImagePickerController alloc] init];
   viewController.selectHandler = ^(UIImage * image) {
+#if	0
     UIAlertView *	alertView;
     alertView = [[UIAlertView alloc]
 		  initWithTitle:NSLocalizedString(@"ImageSize", @"")
@@ -93,6 +113,9 @@ static void uncaughtExceptionHandler(NSException * exception)
 		  otherButtonTitles:nil];
     [alertView show];
     [alertView release];
+#else
+    [weakSelf activityActionForImage:image];
+#endif
   };
   UINavigationController *	navigationController;
   navigationController = [[UINavigationController alloc]
@@ -154,6 +177,32 @@ static void uncaughtExceptionHandler(NSException * exception)
 #pragma mark UIApplication delegate
 -(void)applicationWillTerminate:(UIApplication *)application
 {
+}
+
+/*****************************************************************************/
+
+-(void)activityActionForImage:(UIImage *)image
+{
+  NSAutoreleasePool *	pool = [[NSAutoreleasePool alloc] init];
+
+  NSMutableArray *	items;
+  items = [[NSMutableArray alloc] init];
+  [items addObject:image];
+
+  UIActivityViewController *	activityViewController;
+  activityViewController = [[UIActivityViewController alloc]
+			    initWithActivityItems:items
+			    applicationActivities:nil];
+  activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+
+  [self.navigationController presentViewController:activityViewController
+			     animated:YES
+			     completion:nil];
+
+  [activityViewController release];
+  [items release];
+
+  [pool drain];
 }
 
 @end
