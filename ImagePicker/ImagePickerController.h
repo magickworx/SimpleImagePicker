@@ -3,14 +3,14 @@
  * FILE:	ImagePickerController.h
  * DESCRIPTION:	ImagePicker: Image Picker Controller using Assets Library
  * DATE:	Mon, Feb 11 2013
- * UPDATED:	Mon, Feb 18 2013
+ * UPDATED:	Fri, Feb 21 2014
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.iPhone.MagickWorX.COM/
- * COPYRIGHT:	(c) 2013 阿部康一／Kouichi ABE (WALL), All rights reserved.
+ * COPYRIGHT:	(c) 2013-2014 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
- *  Copyright (c) 2013 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
+ *  Copyright (c) 2013-2014 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -43,11 +43,5 @@
 typedef void	(^ImagePickerSelectHandler)(UIImage * image);
 
 @interface ImagePickerController : UITableViewController
-{
-@private
-  ImagePickerSelectHandler	_selectHandler;
-}
-
 @property (nonatomic,copy) ImagePickerSelectHandler	selectHandler;
-
 @end

@@ -3,14 +3,14 @@
  * FILE:	AppDelegate.m
  * DESCRIPTION:	ImagePicker: Application Main Controller
  * DATE:	Mon, Feb 18 2013
- * UPDATED:	Thu, Mar 21 2013
+ * UPDATED:	Fri, Feb 21 2014
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.MagickWorX.COM/
- * COPYRIGHT:	(c) 2013 阿部康一／Kouichi ABE (WALL), All rights reserved.
+ * COPYRIGHT:	(c) 2013-2014 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
- *  Copyright (c) 2013 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
+ *  Copyright (c) 2013-2014 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -43,17 +43,11 @@
 #import "AppDelegate.h"
 #import "ImagePickerController.h"
 
-@interface AppDelegate ()
-@property (nonatomic,retain) UINavigationController *	navigationController;
-@end
-
-@interface AppDelegate (Private)
--(void)activityActionForImage:(UIImage *)image;
+@interface AppDelegate () <UIApplicationDelegate>
+@property (nonatomic,strong) UINavigationController *	navigationController;
 @end
 
 @implementation AppDelegate
-
-@synthesize	navigationController	= _navigationController;
 
 #if     DEBUG
 static void uncaughtExceptionHandler(NSException * exception)
@@ -78,13 +72,6 @@ static void uncaughtExceptionHandler(NSException * exception)
   return self;
 }
 
--(void)dealloc
-{
-  [_window release];
-  [_navigationController release];
-  [super dealloc];
-}
-
 #pragma mark UIApplication delegate
 -(BOOL)application:(UIApplication *)application
 	didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -97,11 +84,10 @@ static void uncaughtExceptionHandler(NSException * exception)
   window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   window.backgroundColor = [UIColor whiteColor];
   self.window = window;
-  [window release];
 
-  __block AppDelegate *		weakSelf = self;
+  __weak typeof(self)		weakSelf = self;
   ImagePickerController *	viewController;
-  viewController = [[ImagePickerController alloc] init];
+  viewController = [ImagePickerController new];
   viewController.selectHandler = ^(UIImage * image) {
 #if	0
     UIAlertView *	alertView;
@@ -112,7 +98,6 @@ static void uncaughtExceptionHandler(NSException * exception)
 		  cancelButtonTitle:NSLocalizedString(@"Close", @"")
 		  otherButtonTitles:nil];
     [alertView show];
-    [alertView release];
 #else
     [weakSelf activityActionForImage:image];
 #endif
@@ -122,8 +107,6 @@ static void uncaughtExceptionHandler(NSException * exception)
 			  initWithRootViewController:viewController];
   self.window.rootViewController = navigationController;
   self.navigationController = navigationController;
-  [viewController release];
-  [navigationController release];
 
   [self.window makeKeyAndVisible];
 
@@ -183,26 +166,21 @@ static void uncaughtExceptionHandler(NSException * exception)
 
 -(void)activityActionForImage:(UIImage *)image
 {
-  NSAutoreleasePool *	pool = [[NSAutoreleasePool alloc] init];
+  @autoreleasepool {
+    NSMutableArray *	items;
+    items = [NSMutableArray new];
+    [items addObject:image];
 
-  NSMutableArray *	items;
-  items = [[NSMutableArray alloc] init];
-  [items addObject:image];
+    UIActivityViewController *	activityViewController;
+    activityViewController = [[UIActivityViewController alloc]
+			      initWithActivityItems:items
+			      applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
 
-  UIActivityViewController *	activityViewController;
-  activityViewController = [[UIActivityViewController alloc]
-			    initWithActivityItems:items
-			    applicationActivities:nil];
-  activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-
-  [self.navigationController presentViewController:activityViewController
-			     animated:YES
-			     completion:nil];
-
-  [activityViewController release];
-  [items release];
-
-  [pool drain];
+    [self.navigationController presentViewController:activityViewController
+			       animated:YES
+			       completion:nil];
+  }
 }
 
 @end

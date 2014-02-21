@@ -3,14 +3,14 @@
  * FILE:	AppDelegate.h
  * DESCRIPTION:	ImagePicker: Application Main Controller
  * DATE:	Mon, Feb 18 2013
- * UPDATED:	Mon, Feb 18 2013
+ * UPDATED:	Fri, Feb 21 2014
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.MagickWorX.COM/
- * COPYRIGHT:	(c) 2013 阿部康一／Kouichi ABE (WALL), All rights reserved.
+ * COPYRIGHT:	(c) 2013-2014 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
- *  Copyright (c) 2013 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
+ *  Copyright (c) 2013-2014 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -42,8 +42,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (nonatomic,retain) UIWindow *	window;
-
+@interface AppDelegate : UIResponder
+@property (nonatomic,strong) UIWindow *	window;
 @end

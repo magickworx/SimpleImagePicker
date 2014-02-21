@@ -3,14 +3,14 @@
  * FILE:	ImagePickerController.m
  * DESCRIPTION:	ImagePicker: Image Picker Controller using Assets Library
  * DATE:	Mon, Feb 11 2013
- * UPDATED:	Mon, Feb 18 2013
+ * UPDATED:	Fri, Feb 21 2014
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.iPhone.MagickWorX.COM/
- * COPYRIGHT:	(c) 2013 阿部康一／Kouichi ABE (WALL), All rights reserved.
+ * COPYRIGHT:	(c) 2013-2014 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
- *  Copyright (c) 2013 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
+ *  Copyright (c) 2013-2014 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -54,24 +54,16 @@
  *
  *****************************************************************************/
 @interface AssetsCollectionCell : UICollectionViewCell
-{
-@private
-  UIImageView *	_imageView;
-  UILabel *	_textLabel;
-}
-@property (nonatomic,retain,readonly) UIImageView *	imageView;
-@property (nonatomic,retain,readonly) UILabel *		textLabel;
+@property (nonatomic,strong,readonly) UIImageView *	imageView;
+@property (nonatomic,strong,readonly) UILabel *		textLabel;
 @end
 
 @interface AssetsCollectionCell ()
-@property (nonatomic,retain,readwrite) UIImageView *	imageView;
-@property (nonatomic,retain,readwrite) UILabel *	textLabel;
+@property (nonatomic,strong,readwrite) UIImageView *	imageView;
+@property (nonatomic,strong,readwrite) UILabel *	textLabel;
 @end
 
 @implementation AssetsCollectionCell
-
-@synthesize	imageView	= _imageView;
-@synthesize	textLabel	= _textLabel;
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -88,22 +80,13 @@
     [imageView setClipsToBounds:YES];
     [self.contentView addSubview:imageView];
     self.imageView = imageView;
-    [imageView release];
 
     UILabel *	textLabel;
     textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:textLabel];
     self.textLabel = textLabel;
-    [textLabel release];
   }
   return self;
-}
-
--(void)dealloc
-{
-  [_imageView release];
-  [_textLabel release];
-  [super dealloc];
 }
 
 -(void)prepareForReuse
@@ -133,20 +116,11 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
 @end
 
 @interface AssetsPickerController ()
-{
-@private
-  ALAssetsGroup *	_group;
-  NSMutableArray *	_assets;
-}
-@property (nonatomic,retain) ALAssetsGroup *	group;
-@property (nonatomic,retain) NSMutableArray *	assets;
+@property (nonatomic,strong) ALAssetsGroup *	group;
+@property (nonatomic,strong) NSMutableArray *	assets;
 @end
 
 @implementation AssetsPickerController
-
-@synthesize	selectHandler	= _selectHandler;
-@synthesize	group	= _group;
-@synthesize	assets	= _assets;
 
 -(id)initWithAssetsGroup:(ALAssetsGroup *)group
 {
@@ -163,20 +137,10 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
     self.group = group;
     [self.collectionView registerClass:[AssetsCollectionCell class]
 			 forCellWithReuseIdentifier:assetsCellIdentifier];
-    _assets = [[NSMutableArray alloc] init];
+    self.assets = [NSMutableArray new];
   }
 
-  [layout release];
-
   return self;
-}
-
--(void)dealloc
-{
-  [_selectHandler release];
-  [_group release];
-  [_assets release];
-  [super dealloc];
 }
 
 -(void)viewDidLoad
@@ -275,8 +239,9 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
       _selectHandler(image);
     }
   }
-
+#if	0
   [self dismissViewControllerAnimated:YES completion:nil];
+#endif
 }
 
 @end
@@ -287,20 +252,11 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
  *
  *****************************************************************************/
 @interface ImagePickerController ()
-{
-@private
-  ALAssetsLibrary *	_assetsLibrary;
-  NSMutableArray *	_assetsGroup;
-}
-@property (nonatomic,retain) ALAssetsLibrary *	assetsLibrary;
-@property (nonatomic,retain) NSMutableArray *	assetsGroup;
+@property (nonatomic,strong) ALAssetsLibrary *	assetsLibrary;
+@property (nonatomic,strong) NSMutableArray *	assetsGroup;
 @end
 
 @implementation ImagePickerController
-
-@synthesize	selectHandler	= _selectHandler;
-@synthesize	assetsLibrary	= _assetsLibrary;
-@synthesize	assetsGroup	= _assetsGroup;
 
 -(id)init
 {
@@ -308,22 +264,10 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
   if (self) {
     self.title	= NSLocalizedString(@"ImagePicker", @"");
 
-    ALAssetsLibrary *	assetsLibrary;
-    assetsLibrary = [[ALAssetsLibrary alloc] init];
-    self.assetsLibrary = assetsLibrary;
-    [assetsLibrary release];
-
-    _assetsGroup = [[NSMutableArray alloc] init];
+    self.assetsLibrary	= [ALAssetsLibrary new];
+    self.assetsGroup	= [NSMutableArray new];
   }
   return self;
-}
-
--(void)dealloc
-{
-  [_selectHandler release];
-  [_assetsLibrary release];
-  [_assetsGroup release];
-  [super dealloc];
 }
 
 -(void)didReceiveMemoryWarning
@@ -354,7 +298,6 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
   tableView.autoresizingMask	= UIViewAutoresizingFlexibleWidth
 				| UIViewAutoresizingFlexibleHeight;
   self.tableView = tableView;
-  [tableView release];
 
 
   ALAssetsLibraryGroupsEnumerationResultsBlock	resultsBlock = ^(ALAssetsGroup * group, BOOL * stop) {
@@ -409,7 +352,6 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
     cell = [[UITableViewCell alloc]
 	    initWithStyle:UITableViewCellStyleDefault
 	    reuseIdentifier:cellIdentifier];
-    [cell autorelease];
   }
   cell.accessoryType	= UITableViewCellAccessoryDisclosureIndicator;
 
@@ -429,18 +371,15 @@ static NSString * assetsCellIdentifier = @"AssetsCollectionCellIdentifier";
 {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-  ALAssetsGroup *	group = [_assetsGroup objectAtIndex:[indexPath row]];
+  @autoreleasepool {
+    ALAssetsGroup *	group = [_assetsGroup objectAtIndex:[indexPath row]];
 
-  NSAutoreleasePool *	pool = [[NSAutoreleasePool alloc] init];
-
-  AssetsPickerController *	viewController;
-  viewController = [[AssetsPickerController alloc] initWithAssetsGroup:group];
-  viewController.title = [group valueForProperty:ALAssetsGroupPropertyName];
-  viewController.selectHandler = self.selectHandler;
-  [self.navigationController pushViewController:viewController animated:YES];
-  [viewController release];
-
-  [pool drain];
+    AssetsPickerController *	viewController;
+    viewController = [[AssetsPickerController alloc] initWithAssetsGroup:group];
+    viewController.title = [group valueForProperty:ALAssetsGroupPropertyName];
+    viewController.selectHandler = self.selectHandler;
+    [self.navigationController pushViewController:viewController animated:YES];
+  }
 }
 
 @end
